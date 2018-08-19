@@ -1,0 +1,78 @@
+page-crear-lista {
+
+    .input-cover{position: static !important}
+
+    background-color: map-get($colors, primary) !important;
+
+    ion-content{
+        background-color: map-get($colors, primary) !important;
+    }
+
+    .item-list{
+        display: flex;
+
+        .name{    
+            height: 72px;
+            width: 40%;            
+        }
+
+        .others{
+            display: flex;
+            align-items: flex-end;
+            width: 60%;
+            
+            .item{
+                display: table-cell;
+                width: 50%;
+            }
+
+            .button{
+                width: 14%;
+                float: none !important;
+                height: 2.5rem;
+            }
+        }
+
+        .boton-eliminar{
+            max-width: 43px;
+        }
+    }
+    
+    .item-md{
+        padding-left: 7px;
+    }
+
+    .item-md.item-block .item-inner{
+        padding-right: 0;
+    }
+    .item-md.item-input.item-input-has-focus .item-inner, .item-md.item-input.input-has-focus .item-inner{
+        border-bottom-color: rgb(129, 129, 129);
+    }
+
+    .form-lista{
+        position: relative;
+        height: 100%;
+    }
+
+    .scroll-items{
+        padding: 0;
+        .scroll-content{
+            padding: 0 !important;
+        }
+    }
+
+    p.title{
+        font-size: 1.5em;
+        color: #acacac;
+        padding: 0;
+        margin: 0;
+        margin-top: 10px;
+        font-family: 'GothamRoundedBold';
+
+        button{
+            width: 20px;
+            height: 27px;
+            float: right;
+        }
+    }
+}

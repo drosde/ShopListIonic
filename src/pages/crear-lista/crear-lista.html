@@ -1,0 +1,57 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Crear nueva lista</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <p class="title">Datos</p>
+  <form [formGroup]="listaForm" class="form-lista" (ngSubmit)="guardarLista(lista, items)">
+    <!-- <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input type="text" [(ngModel)]="user.Username" formControlName="username"></ion-input>
+    </ion-item> -->
+
+    <ion-item color="primary">
+      <ion-label floating>Titulo de la lista</ion-label>
+      <ion-input type="text" [(ngModel)]="lista.title" formControlName="title"></ion-input>
+    </ion-item>
+
+    <ion-item color="primary">
+      <ion-label floating>Nota (opcional)</ion-label>
+      <ion-input type="text" [(ngModel)]="lista.note" formControlName="note"></ion-input>
+    </ion-item>
+
+    <p class="title">
+      Items 
+      <button ion-button color="light" type="button" float-right (click)="alertForumularioItem()"><ion-icon name="md-add"></ion-icon></button>
+    </p>
+      <div class="item-list" *ngFor="let item of items; let i = index" style="position: initial;" [style.margin-top]="i==0 ? '16px' : null">
+        <ion-item class="name" color="primary">
+          <ion-label floating>Nombre</ion-label>
+          <ion-input type="text" [(ngModel)]="items[i].name" [ngModelOptions]="{standalone: true}" disabled="true"></ion-input>
+        </ion-item>
+        <div class="others">
+          <ion-item class="amount" color="primary">
+            <ion-label floating>Cantidad</ion-label>
+            <ion-input type="number" [(ngModel)]="items[i].amount" [ngModelOptions]="{standalone: true}" disabled="true"></ion-input>
+          </ion-item>
+
+          <ion-item class="price" color="primary">
+            <ion-label floating>Precio</ion-label>
+            <ion-input type="number" [(ngModel)]="items[i].price" [ngModelOptions]="{standalone: true}" disabled="true"></ion-input>
+          </ion-item>
+
+          <button ion-button color="danger" type="button" class="boton-eliminar" float-left (click)="eliminarItem(item, i)"><ion-icon name="md-remove"></ion-icon></button>
+          </div>
+      </div>
+  </form>
+</ion-content>
+
+<ion-footer no-margin no-padding *ngIf="!isKeyboardOpen">
+    <button ion-button full margin-top type="submit" (click)="guardarLista(lista, items)" [disabled]="(!listaForm.valid || this.processing || items.length <= 0)">Crear</button>
+</ion-footer>

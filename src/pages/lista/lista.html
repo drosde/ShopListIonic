@@ -1,0 +1,49 @@
+<!--
+  Generated template for the ListaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{ lista.title }}</ion-title>
+    <ion-buttons end>
+        <button ion-button class="button-header" color="secondary" (click)="borrarLista()">
+            <ion-icon name="trash" margin-left></ion-icon>
+        </button>
+        <button ion-button class="button-header" color="secondary" (click)="editarLista()">
+          Edit
+          <!-- <ion-icon name="build" margin-left></ion-icon> -->
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Precio</th>
+      </tr>
+    </thead>
+    <tbody>    
+      <tr class="item" *ngFor="let item of lista.content; let i = index">
+        <th>{{ i + 1 }}</th>
+        <th>{{ item.name }}</th>
+        <th>{{ item.amount }}</th>
+        <th>${{ item.price }}</th>
+      </tr>
+
+      <tr class="total">
+        <th>Total</th>
+        <th></th>
+        <th></th>
+        <th>{{ lista.total }}</th>
+      </tr>
+    </tbody>
+  </table>
+  <div class="nota"> <h3 class="titulo-nota">Nota</h3> <span class="content-nota">{{ lista.note }}</span></div>
+</ion-content>

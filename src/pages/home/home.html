@@ -1,17 +1,34 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Shop list</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <div class="listas">
+
+    <!-- Lists -->
+    <ng-container *ngIf="helper.storageItems.listas && helper.storageItems.listas.length > 0" style="display: flex;">
+      <div class="lista" *ngFor="let lista of helper.storageItems.listas; let i = index" (click)="abrirLista(lista, i)">
+        <div class="title">
+          <ion-icon name="pricetag"></ion-icon>
+          <span class="titulo-lista">{{ lista.title }}</span>
+        </div>
+        <div class="total">
+          <ion-icon name="calculator"></ion-icon>
+          <span class="total-lista">${{ lista.total }}</span>
+        </div>
+        <div class="date">
+          <ion-icon name="calendar"></ion-icon>
+          <span class="total-lista">{{ lista.date }}</span>          
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- New list -->
+    <div class="nueva-lista" (click)="crearLista()">
+      <span class="text-lista">Crear lista</span>
+      <ion-icon name="md-add"></ion-icon>
+    </div>
+  </div>
 </ion-content>

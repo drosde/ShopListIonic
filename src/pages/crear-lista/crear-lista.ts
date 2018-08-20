@@ -25,7 +25,7 @@ export class CrearListaPage {
   items:ItemList[] = [];
   index:number = null;
 
-  isKeyboardOpen:boolean = false;
+  isUpdate:boolean = false;
 
   constructor(
     public navCtrl: NavController, public navParams: NavParams, 
@@ -38,8 +38,8 @@ export class CrearListaPage {
 
     if(p_list){
       this.lista = p_list;
-  
-      this.items = p_list.content;
+      this.items = p_list.content;      
+      this.isUpdate = true;
     }
 
     this.listaForm = this.formBuilder.group({

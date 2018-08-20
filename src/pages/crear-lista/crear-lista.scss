@@ -35,6 +35,23 @@ page-crear-lista {
 
         .boton-eliminar{
             max-width: 43px;
+            width: 20px;
+            height: 27px;
+            float: right;
+            position: relative;
+            border-radius: 5%;
+
+            .icon {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                height: 50%;
+                transform: translate(-50%, -50%);
+                // width: 7px;
+                // height: 7px;
+                display: block;
+                // background: red;
+            }
         }
     }
     
@@ -73,6 +90,29 @@ page-crear-lista {
             width: 20px;
             height: 27px;
             float: right;
+            position: relative;
+            border-radius: 100%;
+
+            .icon {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                height: 50%;
+                transform: translate(-50%, -50%);
+                // width: 7px;
+                // height: 7px;
+                display: block;
+                // background: red;
+            }
+        }
+    }
+
+    .footer{
+        .button{
+            margin: 7px -3px 8px 1%;
+            background-color: rgb(54, 48, 112);
+            width: 97.5%;
+            border-radius: 5px;
         }
     }
 }

@@ -41,9 +41,12 @@
         <th>Total</th>
         <th></th>
         <th></th>
-        <th>{{ lista.total }}</th>
+        <th>${{ lista.total }}</th>
       </tr>
     </tbody>
   </table>
-  <div class="nota"> <h3 class="titulo-nota">Nota</h3> <span class="content-nota">{{ lista.note }}</span></div>
+  <div class="nota" *ngIf="lista.note"> 
+    <h3 class="titulo-nota">Nota</h3> 
+    <span class="content-nota">{{ lista.note }}</span>
+  </div>
 </ion-content>

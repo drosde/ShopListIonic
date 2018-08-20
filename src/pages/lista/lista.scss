@@ -10,15 +10,15 @@ page-lista {
 
 
     tr.total {
-        background-color: #ffffaa80;
-        th:nth-child(1){
-            background-color: #ffffaa3d;
-            // color: red;
+        background-color: rgba(157, 157, 157, 0.08);
+
+        th{
+            border-radius: 5px;
         }
 
         th:last-child{
-            color: #000000;
-            background-color: #ffffaa80;
+            color: rgba(0, 225, 25, 0.99);
+            background-color: rgba(0, 0, 0, 0.62);
         }
     }
 

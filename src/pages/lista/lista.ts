@@ -14,7 +14,6 @@ export class ListaPage {
 
   lista:Lista;
   index:number;
-
   constructor(
     public navCtrl: NavController, public navParams: NavParams,
     public helper:HelperProvider) {

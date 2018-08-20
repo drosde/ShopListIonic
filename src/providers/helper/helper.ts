@@ -12,7 +12,7 @@ export class HelperProvider {
     private storage:NativeStorage, private platform:Platform,
     private toastCtrl:ToastController,
   ) {
-    this.getInitialsOptions();
+    platform.ready().then(() => this.getInitialsOptions());
 
     // let lista:Lista = {
     //   title: 'Kiosko',

@@ -28,7 +28,7 @@
 
     <p class="title">
       Items 
-      <button ion-button color="light" type="button" float-right (click)="alertForumularioItem()"><ion-icon name="md-add"></ion-icon></button>
+      <button ion-button color="light" type="button" class="boton-agregar-item" float-right (click)="alertForumularioItem()"><ion-icon name="md-add"></ion-icon></button>
     </p>
       <div class="item-list" *ngFor="let item of items; let i = index" style="position: initial;" [style.margin-top]="i==0 ? '16px' : null">
         <ion-item class="name" color="primary">
@@ -53,5 +53,5 @@
 </ion-content>
 
 <ion-footer no-margin no-padding *ngIf="!isKeyboardOpen">
-    <button ion-button full margin-top type="submit" (click)="guardarLista(lista, items)" [disabled]="(!listaForm.valid || this.processing || items.length <= 0)">Crear</button>
+    <button ion-button full margin-top color="secondary" type="submit" (click)="guardarLista(lista, items)" [disabled]="(!listaForm.valid || this.processing || items.length <= 0)">{{ isUpdate ? 'Actualizar' : 'Crear'}}</button>
 </ion-footer>

@@ -4,7 +4,7 @@ import { Lista } from '../../models/lista';
 import { HomePage } from '../home/home';
 import { CrearListaPage } from '../crear-lista/crear-lista';
 import { HelperProvider } from '../../providers/helper/helper';
-
+import { ItemList } from '../../models/item';
 @IonicPage()
 @Component({
   selector: 'page-lista',
@@ -14,6 +14,8 @@ export class ListaPage {
 
   lista:Lista;
   index:number;
+  mostarItemTotal:boolean = false;
+
   constructor(
     public navCtrl: NavController, public navParams: NavParams,
     public helper:HelperProvider) {
@@ -37,5 +39,10 @@ export class ListaPage {
     .catch(e => console.error('Error al borrar la lista.'))
 
     this.navCtrl.pop();
+  }
+
+  verTotalItem(event, item:ItemList){
+    let content = event.target.innerHTML;
+    event.target.innerHTML = (content == item.price.parsed ? item.totalPriceItem.parsed : item.price.parsed );
   }
 }

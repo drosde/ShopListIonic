@@ -33,3 +33,20 @@
 body{
     background-color: map-get($colors, primary) !important;
 }
+
+.alert-wrapper{
+    background-color: rgb(27, 29, 32) !important;
+    color: rgba(255, 255, 255, 0.81) !important;
+
+    .alert-radio-icon{
+        border-color: #8d8b8b;            
+    }
+
+    .alert-button{
+        color: rgb(54, 193, 135);
+    }
+
+    .alert-radio-label, .alert-input{
+        color: #fff;                
+    }
+}

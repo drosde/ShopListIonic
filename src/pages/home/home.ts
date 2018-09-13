@@ -11,9 +11,7 @@ import { CrearListaPage } from '../crear-lista/crear-lista';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, private helper:HelperProvider) {
-    
-  }
+  constructor(public navCtrl: NavController, private helper:HelperProvider) {}
 
   abrirLista(lista:Lista, i:number){
     this.navCtrl.push(ListaPage, {lista, index: i});

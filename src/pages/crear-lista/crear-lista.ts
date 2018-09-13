@@ -34,48 +34,52 @@ export class CrearListaPage {
       
     let p_list = this.navParams.get('lista');
     this.index = this.navParams.get('index');
-    // console.log(this.index);
 
     if(p_list){
       this.lista = p_list;
       this.items = p_list.content;      
       this.isUpdate = true;
+    }else{      
+      this.lista.total = {
+        raw: 0,
+        parsed: "$0"
+      }
     }
 
     this.listaForm = this.formBuilder.group({
       title: ['', Validators.compose([Validators.required])],
-      // content: ['', Validators.compose([Validators.required])],
       note: ['']
     });
 
   }
 
   ionViewDidLoad() {
-
-    // for(let i=0; i<25; i++){
-    //   this.items.push(this.helper.generarItems());
-    // }
-
   }
 
   guardarLista(lista:Lista, items:ItemList[]){
     this.processing = true;
 
-    //delete last item, is null.
-    // let lastitem = items[items.length - 1];
-    // if(!lastitem.price && !lastitem.name && !lastitem.amount){
-    //   items.pop();
-    // }
+    let totalList:number = 0;
+
+    console.log('Lista antes d calculos', lista);
+    
+    items.forEach(e => {
+      if(typeof e.amount === "string") e.amount = parseInt(e.amount)
+      if(typeof e.price.raw === "string") e.price.raw = parseInt(e.price.raw)
+      totalList += e.totalPriceItem.raw = e.amount * e.price.raw;
+      e.totalPriceItem.parsed = this.helper.numbertoMoney(e.totalPriceItem.raw);
+    });
 
     lista.content = items;
-    lista.total = this.calcularTotal(items);
+    lista.total.raw = totalList;
+    lista.total.parsed = this.helper.numbertoMoney(lista.total.raw);
 
     let date = new Date();
     lista.date = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
 
     console.log('Lista', lista);
 
-    console.log(this.index);
+    console.log('Lista index', this.index);
     this.helper.agregarListaStorage(lista, this.index)
     .then(() => {
       this.helper.toast('Se creo la lista!', true, 'bottom', 2200);
@@ -93,41 +97,60 @@ export class CrearListaPage {
     console.log('item', item);
     console.log('ITEMS', this.items);
 
-    if(!item.agregado && item.name && item.amount && item.price) this.items.push({name: null, amount: null, price: null});
+    if(!item.agregado && item.name && item.amount && item.price) this.items.push({name: null, amount: null, price: {raw:null, parsed:null}, totalPriceItem:{raw:null, parsed:null}});
     item.agregado = true;
   }
 
   eliminarItem(item:ItemList, indice:number){
-    // if(this.items.length == 1){
-    //   item.name = null
-    //   item.price = null
-    //   item.amount = null
-    // }else 
     this.items.splice(indice, 1)
   }
 
-  calcularTotal(items:ItemList[]){
-    let total:number = 0;
-    items.forEach(el => {
-      console.log(el)
-      total += parseInt(el.price+"");
-    });
-    return total;
+  pasarPrecioaDinero(value:number, item:ItemList){
+    console.log(value, item.price);
+    item.price.parsed = this.helper.numbertoMoney(value);
   }
 
   async alertForumularioItem(){
     let alert = await this.alertCtrl.create({
       title: "Agregar Item",
+      inputs: [
+      {
+        type: 'text',
+        name: 'name',
+        placeholder: 'Item Name'
+      },{
+        type: 'number',
+        name: 'amount',
+        min: 1,
+        placeholder: 'Cantidad'
+      },{
+        type: 'number',
+        name: 'price',
+        placeholder: 'Item Price'
+      }],
       buttons: [
         {
           text: 'Guardar',
           handler: (data) => {
             if((data.price && data.amount && data.name) && data.amount > 0){
-              // let i = this.items[0];
-              // if(i && (!i.price && !i.amount && !i.name)){
-              //   this.items[0] = data;
-              // }else{
-                this.items.push(data);
+                data.price = parseInt(data.price);
+                data.amount = parseInt(data.amount);
+
+                let item:ItemList = {
+                  name: data.name,
+                  amount: data.amount,
+                  price: {
+                    raw: data.price,
+                    parsed: this.helper.numbertoMoney(data.price)
+                  },
+                  totalPriceItem: {
+                    raw: data.amount * data.price,
+                    parsed: this.helper.numbertoMoney(data.amount * data.price)
+                  }
+                }
+
+                console.log(item);
+                this.items.push(item);
               // }
             }else{         
               let msg = data.amount > 0 ? 'Completa todos los campos del item.' : "Cantidad no puede ser menor o igual a 0";
@@ -142,21 +165,7 @@ export class CrearListaPage {
             console.log('Cancel clicked');
           }
         }
-      ],
-      inputs: [{
-        type: 'text',
-        name: 'name',
-        placeholder: 'Item Name'
-      },{
-        type: 'number',
-        name: 'amount',
-        min: 1,
-        placeholder: 'Cantidad'
-      },{
-        type: 'number',
-        name: 'price',
-        placeholder: 'Item Price'
-      }]
+      ]
     });
     alert.present();
   }

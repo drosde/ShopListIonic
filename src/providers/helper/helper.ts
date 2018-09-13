@@ -17,16 +17,35 @@ export class HelperProvider {
     // let lista:Lista = {
     //   title: 'Kiosko',
     //   content: [
-    //     {name: 'Alfajor', price: 15, amount: 10}, 
-    //     {name: 'Gaseosa', price: 60, amount: 2}
+    //   {
+    //     name: 'Alfajor', 
+    //     price: {raw:1505, parsed: this.numbertoMoney(1505)}, 
+    //     amount: 2, 
+    //     totalPriceItem: {raw: 1505 * 2, parsed:this.numbertoMoney(1505 * 2)}
+    //   }, 
+    //   {
+    //     name: 'Gaseosa', 
+    //     price: {
+    //       raw: 1690, 
+    //       parsed: this.numbertoMoney(1690)
+    //     }, 
+    //     amount: 3, 
+    //     totalPriceItem: {
+    //       raw: 1690 * 3, 
+    //       parsed:this.numbertoMoney(1690 * 3)
+    //     }
+    //   }
     //   ],
     //   note: '3 dulcedeleche, 5 blancos y 2 de cualquier otro',
-    //   total: 75,
+    //   total: {
+    //     raw: (1505 * 2 + 1690 * 3),
+    //     parsed: this.numbertoMoney(1505 * 2 + 1690 * 3)
+    //   },
     //   date: "18/7/2018"
     // }
 
     // /* TTTEST */
-    //   this.storageItems.listas = [lista];
+    // this.storageItems.listas = [lista];
     // /** */
     
   }
@@ -111,5 +130,29 @@ export class HelperProvider {
     return {name: items[this.getRandomInt(items.length -1)], 
             amount: this.getRandomInt(200),
             price: this.getRandomInt(2000)};
+  }
+
+  /**
+   * https://stackoverflow.com/a/149099
+   */
+  numbertoMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
+    try {
+      decimalCount = Math.abs(decimalCount);
+      decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+  
+      const negativeSign = amount < 0 ? "-" : "";
+  
+      let i:any = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+      let j = (i.length > 3) ? i.length % 3 : 0;
+  
+      return '$'+ negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+    } catch (e) {
+      console.log(e);
+      return amount;
+    }
+  }
+
+  parseMoneyToNumber(value:string){
+    return parseFloat(value.replace(/\./g,"").replace(",","."));
   }
 }

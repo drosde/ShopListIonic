@@ -1,6 +1,13 @@
 export interface ItemList {
     name: string,
-    price: number,
+    price: {
+        raw: number,
+        parsed: string
+    },
     amount: number,
-    agregado?: boolean
+    agregado?: boolean,
+    totalPriceItem: {
+        raw: number,
+        parsed: string
+    }
 }

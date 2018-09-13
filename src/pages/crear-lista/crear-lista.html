@@ -33,17 +33,17 @@
       <div class="item-list" *ngFor="let item of items; let i = index" style="position: initial;" [style.margin-top]="i==0 ? '16px' : null">
         <ion-item class="name" color="primary">
           <ion-label floating>Nombre</ion-label>
-          <ion-input type="text" [(ngModel)]="items[i].name" [ngModelOptions]="{standalone: true}" disabled="true"></ion-input>
+          <ion-input type="text" [(ngModel)]="items[i].name" [ngModelOptions]="{standalone: true}"></ion-input>
         </ion-item>
         <div class="others">
           <ion-item class="amount" color="primary">
             <ion-label floating>Cantidad</ion-label>
-            <ion-input type="number" [(ngModel)]="items[i].amount" [ngModelOptions]="{standalone: true}" disabled="true"></ion-input>
+            <ion-input type="number" [(ngModel)]="items[i].amount" min="1" [ngModelOptions]="{standalone: true}"></ion-input>
           </ion-item>
 
           <ion-item class="price" color="primary">
             <ion-label floating>Precio</ion-label>
-            <ion-input type="number" [(ngModel)]="items[i].price" [ngModelOptions]="{standalone: true}" disabled="true"></ion-input>
+            <ion-input type="number" [(ngModel)]="items[i].price.raw" (ionChange)="pasarPrecioaDinero(items[i].price.raw, item)" [ngModelOptions]="{standalone: true}"></ion-input>
           </ion-item>
 
           <button ion-button color="danger" type="button" class="boton-eliminar" float-left (click)="eliminarItem(item, i)"><ion-icon name="md-remove"></ion-icon></button>

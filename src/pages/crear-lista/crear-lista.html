@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Crear nueva lista</ion-title>
+    <ion-title>{{ isUpdate ? 'Actualizar lista' : 'Crear nueva lista' }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -23,7 +23,7 @@
 
     <ion-item color="primary">
       <ion-label floating>Nota (opcional)</ion-label>
-      <ion-input type="text" [(ngModel)]="lista.note" formControlName="note"></ion-input>
+      <ion-textarea type="text" [(ngModel)]="lista.note" formControlName="note" max="999"></ion-textarea>
     </ion-item>
 
     <p class="title">
@@ -53,5 +53,5 @@
 </ion-content>
 
 <ion-footer no-margin no-padding *ngIf="!isKeyboardOpen">
-    <button ion-button full margin-top color="secondary" type="submit" (click)="guardarLista(lista, items)" [disabled]="(!listaForm.valid || this.processing || items.length <= 0)">{{ isUpdate ? 'Actualizar' : 'Crear'}}</button>
+    <button ion-button full margin-top color="secondary" type="submit" (click)="guardarLista(lista, items)" [disabled]="(!listaForm.valid || this.processing || items.length <= 0)">{{ isUpdate ? 'Guardar' : 'Crear'}}</button>
 </ion-footer>

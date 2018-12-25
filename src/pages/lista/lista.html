@@ -24,13 +24,14 @@
         </th>
       </tr>
     </thead>
-    <tbody>    
-      <tr class="item" *ngFor="let item of lista.content; let i = index">
+    <tbody>
+      <tr class="item" *ngFor="let item of lista.content; let i = index" (click)="showPriceWithout(i)">
         <th>{{ i + 1 }}</th>
         <th>{{ item.name }}</th>
         <th>{{ item.amount }}</th>
-        <th *ngIf="!mostarItemTotal;else precio_total">{{ item.price.parsed }}</th>
-        <ng-template #precio_total><th>{{ item.totalPriceItem.parsed }}</th></ng-template>
+        <!-- *ngIf="!mostarItemTotal;else precio_total" -->
+        <th [class]="itemsToCancel.indexOf(i) > -1 ? 'price-cancelled' : ''">{{ mostarItemTotal ? item.totalPriceItem.parsed : item.price.parsed }}</th>
+        <!-- <ng-template #precio_total><th>{{ item.totalPriceItem.parsed }}</th></ng-template> -->
       </tr>
 
       <tr class="total">

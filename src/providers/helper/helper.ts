@@ -14,39 +14,39 @@ export class HelperProvider {
   ) {
     platform.ready().then(() => this.getInitialsOptions());
 
-    // let lista:Lista = {
-    //   title: 'Kiosko',
-    //   content: [
-    //   {
-    //     name: 'Alfajor', 
-    //     price: {raw:1505, parsed: this.numbertoMoney(1505)}, 
-    //     amount: 2, 
-    //     totalPriceItem: {raw: 1505 * 2, parsed:this.numbertoMoney(1505 * 2)}
-    //   }, 
-    //   {
-    //     name: 'Gaseosa', 
-    //     price: {
-    //       raw: 1690, 
-    //       parsed: this.numbertoMoney(1690)
-    //     }, 
-    //     amount: 3, 
-    //     totalPriceItem: {
-    //       raw: 1690 * 3, 
-    //       parsed:this.numbertoMoney(1690 * 3)
-    //     }
-    //   }
-    //   ],
-    //   note: '3 dulcedeleche, 5 blancos y 2 de cualquier otro',
-    //   total: {
-    //     raw: (1505 * 2 + 1690 * 3),
-    //     parsed: this.numbertoMoney(1505 * 2 + 1690 * 3)
-    //   },
-    //   date: "18/7/2018"
-    // }
+    let lista:Lista = {
+      title: 'Kiosko',
+      content: [
+      {
+        name: 'Alfajor', 
+        price: {raw:1505, parsed: this.numbertoMoney(1505)}, 
+        amount: 2, 
+        totalPriceItem: {raw: 1505 * 2, parsed:this.numbertoMoney(1505 * 2)}
+      }, 
+      {
+        name: 'Gaseosa', 
+        price: {
+          raw: 1690, 
+          parsed: this.numbertoMoney(1690)
+        }, 
+        amount: 3, 
+        totalPriceItem: {
+          raw: 1690 * 3, 
+          parsed:this.numbertoMoney(1690 * 3)
+        }
+      }
+      ],
+      note: '3 dulcedeleche, 5 blancos y 2 de cualquier otro',
+      total: {
+        raw: (1505 * 2 + 1690 * 3),
+        parsed: this.numbertoMoney(1505 * 2 + 1690 * 3)
+      },
+      date: "18/7/2018"
+    }
 
-    // /* TTTEST */
-    // this.storageItems.listas = [lista];
-    // /** */
+    /* TTTEST */
+    this.storageItems.listas = [lista];
+    /** */
     
   }
 

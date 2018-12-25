@@ -12,7 +12,8 @@ page-home {
 
     .nueva-lista, .lista{
         &:hover{
-            transform: scale(1.2);
+            // transform: scale(1.2);
+            animation: bigger 3s;
         }
 
         display: inline-block;
@@ -54,6 +55,18 @@ page-home {
         background-color: #ED6A5E;
         ion-icon{
             font-size: 3.2em;
+        }
+    }
+
+    @keyframes bigger {
+        10%{
+            transform: scale(1.12);
+        }
+        50%{
+            transform: scale(1.121);
+        }
+        50%{
+            transform: scale(1.125);
         }
     }
 }

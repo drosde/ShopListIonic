@@ -102,4 +102,11 @@ page-lista {
         vertical-align: middle;
         border-color: inherit;
     }
+
+    .item{
+        .price-cancelled{
+            text-decoration: line-through;
+            color: rgba(183, 167, 167, 0.22);
+        }
+    }
 }

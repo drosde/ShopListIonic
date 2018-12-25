@@ -59,10 +59,10 @@ export class CrearListaPage {
   guardarLista(lista:Lista, items:ItemList[]){
     this.processing = true;
 
+    // Reset total price
     let totalList:number = 0;
-
-    console.log('Lista antes d calculos', lista);
     
+    // Get total price
     items.forEach(e => {
       if(typeof e.amount === "string") e.amount = parseInt(e.amount)
       if(typeof e.price.raw === "string") e.price.raw = parseInt(e.price.raw)
@@ -70,19 +70,20 @@ export class CrearListaPage {
       e.totalPriceItem.parsed = this.helper.numbertoMoney(e.totalPriceItem.raw);
     });
 
+    // Create a new list with the items
     lista.content = items;
     lista.total.raw = totalList;
     lista.total.parsed = this.helper.numbertoMoney(lista.total.raw);
 
+    // Set a new date to the list
     let date = new Date();
     lista.date = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
 
-    console.log('Lista', lista);
-
-    console.log('Lista index', this.index);
+    // Save list to local storage
     this.helper.agregarListaStorage(lista, this.index)
     .then(() => {
-      this.helper.toast('Se creo la lista!', true, 'bottom', 2200);
+      let msg = this.isUpdate ? 'Se guardo la lista modificada' : 'Se creo la lista!';
+      this.helper.toast(msg, true, 'bottom', 2200);
       this.navCtrl.pop();
       this.processing = false;
     })
@@ -94,9 +95,6 @@ export class CrearListaPage {
   }
 
   agregarItem(item:ItemList){
-    console.log('item', item);
-    console.log('ITEMS', this.items);
-
     if(!item.agregado && item.name && item.amount && item.price) this.items.push({name: null, amount: null, price: {raw:null, parsed:null}, totalPriceItem:{raw:null, parsed:null}});
     item.agregado = true;
   }
